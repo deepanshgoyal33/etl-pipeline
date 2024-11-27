@@ -1,0 +1,14 @@
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - LOGS_CAPTURED - Started capturing logs in process (pid: 74376).
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - stock_volume - STEP_START - Started execution of step "stock_volume".
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mINFO[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Successfully loaded 1000 records
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mINFO[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Successfully committed offsets: [TopicPartition{topic=stock_volume,partition=0,offset=2000,leader_epoch=None,error=None}]
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mINFO[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Processed 1000 records
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mINFO[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Successfully committed offsets: [TopicPartition{topic=stock_volume,partition=0,offset=2000,leader_epoch=None,error=None}]
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mINFO[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Closing Kafka consumer
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - stock_volume - STEP_OUTPUT - Yielded output "result" of type "DataFrame". (Type check passed).
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - stock_volume - Writing file at: /Users/deepanshgoyal/Desktop/repositories/python-test/dagster-implementation/etl-pipeline/tmpq4n4hwg6/storage/stock_volume using PickledObjectFilesystemIOManager...
+INFO:alembic.runtime.migration:Context impl SQLiteImpl.
+INFO:alembic.runtime.migration:Will assume non-transactional DDL.
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - stock_volume - ASSET_MATERIALIZATION - Materialized value stock_volume.
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - stock_volume - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2024-11-27 22:49:14 +0530[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - e4e7cb30-a7c0-47d6-864c-a4cf902ff8e4 - 74376 - stock_volume - STEP_SUCCESS - Finished execution of step "stock_volume" in 374ms.
