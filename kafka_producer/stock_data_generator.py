@@ -5,8 +5,6 @@ import time
 from datetime import datetime, timedelta
 import random
 from collections import defaultdict
-import numpy as np
-from etl_pipeline.assets.constants import STOCK_PRICE_TOPIC, STOCK_VOLUME_TOPIC
 
 fake = Faker()
 producer = KafkaProducer(
@@ -143,9 +141,9 @@ def produce_initial_batch(num_records=10000):
     
     # Send messages
     for msg in stock_price_messages:
-        producer.send(STOCK_PRICE_TOPIC, msg)
+        producer.send('stock_prices', msg)
     for msg in stock_volume_data_messages:
-        producer.send(STOCK_VOLUME_TOPIC, msg)
+        producer.send('stock_volume', msg)
         
     producer.flush()
     print(f"Produced initial batch of {num_records} records spanning last 10 days")
@@ -155,8 +153,8 @@ def produce_realtime_data():
     """Continue producing real-time data after initial batch"""
     while True:
         stock_price_data, stock_volume_data = generate_stock_data()
-        producer.send(STOCK_VOLUME_TOPIC, stock_price_data)
-        producer.send(STOCK_PRICE_TOPIC, stock_volume_data)
+        producer.send('stock_prices', stock_price_data)
+        producer.send('stock_volume', stock_volume_data)
         print(f"Sent: {stock_price_data} and {stock_volume_data}")
         time.sleep(1)
 

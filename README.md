@@ -123,7 +123,7 @@ python3 kafka_producer/stock_data_generator.py
 ### 5. Start Dagster
 ##### Open a new terminal instance, activate the virtual environment, and start Dagster:
 ```bash
-python3 kafka_producer/stock_data_generator.py
+pip install -e ".[dev]" && dagster dev
 ```
 ---
 ## Running the Pipeline
