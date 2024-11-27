@@ -6,3 +6,6 @@ __pycache__/
 .pytest_cache/
 *.log
 *.db
+*.complete
+*.err
+*.out
