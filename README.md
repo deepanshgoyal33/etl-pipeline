@@ -45,7 +45,7 @@ A custom `DBClient` class manages interactions with the PostgreSQL database. It 
 
 A Dagster job (`stock_data_job`) defines the dependencies between the assets. It ensures that the `joined_stock_data` asset runs after `stock_prices_asset` and `stock_volume`.
 
-A Dagster schedule (`stock_data_schedule`) runs the `stock_data_job` every 20 minutes. The schedule is configured with an execution timezone of UTC.
+A Dagster schedule (`stock_data_schedule`) runs the `stock_data_job` every 2 minutes. The schedule is configured with an execution timezone of UTC.
 
 ## Repo Structure
 ```
@@ -59,7 +59,7 @@ etl-pipeline/  <-  **This is where you have to be, to run this project**
 │   │   └── resources.py
 │   ├── utils/
 │   │   ├── __init__.py
-│   │   └── constants.py      # Configuration constants
+│   │   ├── constants.py      # Configuration constants
 │   │   ├── kafka_client.py   # Kafka resource implementation
 │   │   ├── utils.py           # util functions
 │   │   └── sql_client.py     # Database resource implementation
@@ -69,6 +69,9 @@ etl-pipeline/  <-  **This is where you have to be, to run this project**
 │   ├── __init__.py
 │   |── test_assets.py
 |
+├── kafka_producer/
+│   ├── Dockerfile
+│   |── stock_data_generator.py #Generates the data
 ├── setup.py                  # Package installation
 ├── requirements.txt          # Dependencies
 ├── pyproject.toml           # Build configuration
@@ -119,6 +122,11 @@ To connect to the PostgreSQL database:
 -- If the configurations are not tweaked
 postgresql://myuser:mypassword@localhost:5432/mydatabase
 ```
+You can also connect using terminal-
+```bash
+-- If the configurations are not tweaked
+psql -h localhost -p 5432 -U myuser -d mydatabase # Password- mypassword
+```
 ### Sample Queries
 View stock prices:
 
@@ -149,8 +157,9 @@ WHERE
 ## Future Improvements
 
 * **Data Quality:** Implement data quality checks to ensure data integrity.
-* **Bundle Spark:** Implement data quality checks to ensure data integrity.
+* **Bundle Spark:** A dedicated data processor if the data volume is high.
 * **Alerting:**  Integrate alerting for pipeline failures.
+* **Better deployment pipeline:** Variablise the kafka and postgres credentials/particulars.
 * **Backfilling:** Implement a mechanism for backfilling historical data.
 * **Testing:** Add more comprehensive unit and integration tests.
 * **Dockerization:** Containerize the pipeline for easier deployment.

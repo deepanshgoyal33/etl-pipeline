@@ -148,7 +148,7 @@ def stock_data_job():
 # Schedule job to run every 5 minutes
 @schedule(
     job=stock_data_job,
-    cron_schedule="*/20 * * * *",  # Every 20 minutes
+    cron_schedule="*/2 * * * *",
     execution_timezone="UTC"
 )
 def stock_data_schedule():
