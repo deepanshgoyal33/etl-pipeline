@@ -6,6 +6,7 @@ networks:
 volumes:
   redpanda-0: null
   postgres-data: null # Volume for PostgreSQL data persistence
+  kafka_producer_data: null
 services:
   redpanda-0:
     command:
@@ -71,3 +72,39 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  kafka_producer:
+    container_name: kafka-producer
+    restart: always
+    build:
+      context: kafka_producer/  # Path to your producer's directory
+      dockerfile: Dockerfile # Assumes you have a Dockerfile in kafka_producer/
+    depends_on:
+      - redpanda-0
+    networks:
+      - redpanda_network
+    environment:
+      BOOTSTRAP_SERVERS: redpanda-0:9092 # Connect to Redpanda
+    volumes:
+      - kafka_producer_data:/app/data
+
+  dagster:
+    build:
+      context: .
+      dockerfile: Dockerfile.dagster
+    container_name: dagster
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redpanda-0
+      - postgres
+      - kafka_producer
+    networks:
+      - redpanda_network
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=redpanda-0:9092
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=mydatabase
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword

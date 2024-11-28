@@ -9,6 +9,7 @@ from dagster import AssetExecutionContext
 from enum import Enum
 from contextlib import contextmanager
 from etl_pipeline.utils.utils import get_table_query
+from etl_pipeline.utils.constants import *
 
 class PartitionStrategy(Enum):
     HOURLY = 'hourly'
@@ -25,11 +26,11 @@ class DBClient:
     def __init__(
         self,
         context: Optional[AssetExecutionContext] = None,
-        host: str = 'localhost',
-        port: int = 5432,
-        dbname: str = 'mydatabase',
-        user: str = 'myuser',
-        password: str = 'mypassword',
+        host: str = DB_HOST,
+        port: int = DB_PORT,
+        dbname: str = DB_NAME,
+        user: str = DB_USER,
+        password: str = DB_PASSWORD,
         max_retries: int = 3
     ) -> None:
         """Initialize database client with connection parameters"""

@@ -1,6 +1,8 @@
-pandas
-psycopg2
-pytest
-dagster
 kafka-python-ng
 faker
+numpy
+pandas
+dagster
+confluent_kafka
+psycopg2-binary
+SQLAlchemy

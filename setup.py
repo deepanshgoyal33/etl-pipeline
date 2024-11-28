@@ -10,7 +10,7 @@ setup(
         "kafka-python",
         "pandas",
         "pytz",
-        "sqlalchemy"
+        "sqlalchemy",
     ],
-    extras_require={"dev": ["dagster-webserver", "pytest"]},
+    extras_require={"dev": ["dagster-webserver", "pytest", "pandas"]},
 )

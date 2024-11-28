@@ -1,14 +1,22 @@
 from sqlalchemy import text
+import os
 # Database configuration
 STOCK_PRICE_TABLE = 'stock_prices'
 STOCK_VOLUME_TABLE = 'stock_volumes'
 STOCK_ANALYTICS_DATA = 'stock_analytics_data'
 # Kafka configuration
-KAFKA_BOOTSTRAP_SERVERS = 'localhost:19092'
+KAFKA_BOOTSTRAP_SERVERS = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:19092')
 KAFKA_BATCH_SIZE = 10000
 KAFKA_BATCH_TIMEOUT = 5.0
 STOCK_PRICE_TOPIC = 'stock_prices'
-STOCK_VOLUME_TOPIC = 'stock_volume'
+STOCK_VOLUME_TOPIC = 'stock_volumes'
+
+#SQL configuration
+DB_USER = os.getenv('DB_USER', 'myuser')
+DB_PASSWORD = os.getenv('DB_PASSWORD', 'mypassword')
+DB_HOST = os.getenv('DB_HOST', 'localhost')
+DB_PORT = os.getenv('DB_PORT', '5432')
+DB_NAME = os.getenv('DB_NAME', 'mydatabase')
 
 # Database queries
 stock_prices_create_query = text(f"""

@@ -56,18 +56,19 @@ etl-pipeline/  <-  **This is where you have to be, to run this project**
 │   │   └── assets.py         # Contains all asset definitions
 │   ├── resources/
 │   │   ├── __init__.py
-│   │   ├── kafka_client.py   # Kafka resource implementation
-│   │   └── sql_client.py     # Database resource implementation
+│   │   └── resources.py
 │   ├── utils/
 │   │   ├── __init__.py
 │   │   └── constants.py      # Configuration constants
+│   │   ├── kafka_client.py   # Kafka resource implementation
+│   │   ├── utils.py           # util functions
+│   │   └── sql_client.py     # Database resource implementation
 │   ├── __init__.py
 │   └── definitions.py        # Dagster definitions
 ├── tests/
 │   ├── __init__.py
-│   ├── test_assets.py
-│   ├── test_kafka_client.py
-│   └── test_sql_client.py
+│   |── test_assets.py
+|
 ├── setup.py                  # Package installation
 ├── requirements.txt          # Dependencies
 ├── pyproject.toml           # Build configuration
@@ -90,45 +91,16 @@ pytest etl_pipeline_tests
 
 ## Setup Instructions(Follow in the order they are mentioned)
 
-### 1. Create and Activate a Virtual Environment
-```bash
-# You should be in the parent etl-pipeline directory
-cd etl-pipeline
-# Create the virtual environment
-python -m venv {virtual_env_name}
+### 1. Run a docker-compose-
+#### It will will generate the data, create postgres, kafka and kafka-producer, and will also run dagster, which can be seen on the localhost/3000 port.
 
-# Activate the virtual environment
-source {virtual_env_name}/bin/activate
-## Usage (Follow in the order they are mentioned)
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Start Docker Containers
 ```bash
 docker-compose up -d
-```
-
-### 4. Start the Data Source
-##### Run the stock data generator script to produce stock data into Kafka topics:
-```bash
-python3 kafka_producer/stock_data_generator.py
-```
-##### You can monitor the Kafka topic data by visiting http://localhost:8080/topics.
-
-
-### 5. Start Dagster
-##### Open a new terminal instance, activate the virtual environment, and start Dagster:
-```bash
-pip install -e ".[dev]" && dagster dev
 ```
 ---
 ## Running the Pipeline
 1. Launch the Pipeline
-Use the Dagster UI to run the pipeline (stock_data_job).
+Use the Dagster UI(localhost:3000) to run the pipeline (stock_data_job).
 
 2. View Processed Data
 Processed stock data is stored in the PostgreSQL database. You can query the following tables:
@@ -154,15 +126,12 @@ View stock prices:
 
 --View Stock Prices
 SELECT * FROM stock_prices;
-View stock volumes:
 
 --View Stock volumes traded
 SELECT * FROM stock_volumes;
-View joined analytics data:
 
 --View Stock joined data
 SELECT * FROM stock_analytics_data;
-Check table partitions:
 
 --View Stock Prices partitions
 SELECT

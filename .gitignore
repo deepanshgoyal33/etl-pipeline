@@ -9,3 +9,4 @@ __pycache__/
 *.complete
 *.err
 *.out
+*.idea

@@ -5,10 +5,13 @@ import time
 from datetime import datetime, timedelta
 import random
 from collections import defaultdict
+import numpy as np
+import os
 
 fake = Faker()
+bootstrap_servers = os.getenv('BOOTSTRAP_SERVERS', 'localhost:19092')
 producer = KafkaProducer(
-    bootstrap_servers='localhost:19092',
+    bootstrap_servers=bootstrap_servers,
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
@@ -143,7 +146,7 @@ def produce_initial_batch(num_records=10000):
     for msg in stock_price_messages:
         producer.send('stock_prices', msg)
     for msg in stock_volume_data_messages:
-        producer.send('stock_volume', msg)
+        producer.send('stock_volumes', msg)
         
     producer.flush()
     print(f"Produced initial batch of {num_records} records spanning last 10 days")
@@ -154,7 +157,7 @@ def produce_realtime_data():
     while True:
         stock_price_data, stock_volume_data = generate_stock_data()
         producer.send('stock_prices', stock_price_data)
-        producer.send('stock_volume', stock_volume_data)
+        producer.send('stock_volumes', stock_volume_data)
         print(f"Sent: {stock_price_data} and {stock_volume_data}")
         time.sleep(1)
 
