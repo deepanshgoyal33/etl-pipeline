@@ -103,7 +103,8 @@ docker-compose up -d
 ---
 ## Running the Pipeline
 1. Launch the Pipeline
-Use the Dagster UI(localhost:3000) to run the pipeline (stock_data_job).
+Materialise the 
+'=the Dagster UI(localhost:3000) to run the pipeline (stock_data_job).
 
 2. View Processed Data
 Processed stock data is stored in the PostgreSQL database. You can query the following tables:
@@ -115,6 +116,10 @@ Processed stock data is stored in the PostgreSQL database. You can query the fol
 ---
 
 ## Database Configuration and Queries
+### To see the kafka topic
+```agsl
+http://localhost:8080/overview
+```
 ### Connection String
 To connect to the PostgreSQL database:
 
