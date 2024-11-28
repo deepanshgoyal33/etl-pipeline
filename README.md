@@ -13,7 +13,7 @@ The pipeline performs the following steps:
     * Joins price and volume data based on symbol and timestamp.
     * Calculates derived metrics (e.g., price-volume ratio).
 3. **Load:** Inserts the processed data into PostgreSQL tables, including hourly partitioned tables for stock prices and volume.
-
+4. **Data:** Details inside ./kafka_producer/Readme.md
 ## Architecture
 
 The pipeline uses the following components:
